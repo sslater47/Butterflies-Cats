@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Butterflies & Cats Raining</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(to top, #ffe0f0, #d0f0ff);
+      height: 100vh;
+      font-family: sans-serif;
+    }
+
+    .icon {
+      position: absolute;
+      font-size: 2rem;
+      pointer-events: none;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const butterflies = ['🦋','🦋','🦋','🦋','🦋','🦋','🦋','🦋'];
+  const cats = ['🐱','😺','😸','😹','😻','🙀','😽','😼'];
+  const allIcons = butterflies.concat(cats);
+
+  function createRainEmoji() {
+    const emoji = document.createElement('div');
+    emoji.classList.add('icon');
+    emoji.textContent = allIcons[Math.floor(Math.random() * allIcons.length)];
+
+    emoji.style.left = Math.random() * 100 + 'vw';
+    emoji.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+    emoji.style.animationDuration = (Math.random() * 2 + 3) + 's';
+
+    document.body.appendChild(emoji);
+
+    // Remove after animation ends
+    setTimeout(() => {
+      emoji.remove();
+    }, 5000);
+  }
+
+  document.addEventListener('keydown', () => {
+    for (let i = 0; i < 10; i++) {
+      createRainEmoji();
+    }
+  });
+
+  // Optional: Add a few floating butterflies and cats at start
+  for (let i = 0; i < 30; i++) {
+    setTimeout(() => {
+      createRainEmoji();
+    }, i * 200);
+  }
+</script>
+
+</body>
+</html>
